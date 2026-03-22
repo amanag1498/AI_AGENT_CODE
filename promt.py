@@ -27,8 +27,6 @@ def dont_trim_text(text: str, max_chars: int) -> str:
 
 
 def build_prompt(
-    patches: list[dict],
-    max_files: int,
     max_patch_chars_per_file: int,
 ) -> str:
     usable = []
