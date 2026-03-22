@@ -1,21 +1,5 @@
 from pathlib import Path
 
-
-SKIP_EXTENSIONS = {
-    ".lock", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico",
-    ".mp4", ".mp3", ".pdf", ".zip", ".tar", ".gz", ".woff", ".woff2",
-    ".class", ".jar", ".min.js", ".map"
-}
-
-SKIP_FILENAMES = {
-    "package-lock.json",
-    "yarn.lock",
-    "pnpm-lock.yaml",
-    "poetry.lock",
-    "Cargo.lock"
-}
-
-
 def should_skip_file(filename: str) -> bool:
     lower = filename.lower()
     name = Path(lower).name
@@ -32,6 +16,11 @@ def should_skip_file(filename: str) -> bool:
 
 
 def trim_text(text: str, max_chars: int) -> str:
+    if len(text) <= max_chars:
+        return text
+    return text[:max_chars] + "\n... [TRUNCATED]"
+
+def dont_trim_text(text: str, max_chars: int) -> str:
     if len(text) <= max_chars:
         return text
     return text[:max_chars] + "\n... [TRUNCATED]"
